@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edit Room Availability</title>
+
+<style>
+body {
+  background: #f4f6f9;
+  font-family: 'Segoe UI';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #2e7d32;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* RADIO */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1b5e20;
+}
+
+/* SUCCESS */
+.success {
+  display: none;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* BACK */
+.back {
+  display: none;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.back a {
+  text-decoration: none;
+  color: #2e7d32;
+  font-weight: 500;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Room Update Panel</h2>
+
+  <form id="form">
+
+    <!-- ROOM TYPE -->
+    <select id="roomType">
+      <option value="classroom">Classroom</option>
+      <option value="lab">Lab</option>
+      <option value="seminar">Seminar Hall</option>
+    </select>
+
+    <!-- ROOM -->
+    <input type="text" id="room" placeholder="Room Number (A101)" required>
+
+    <!-- FACULTY -->
+    <input type="text" id="faculty" placeholder="Faculty Name">
+
+    <!-- DATE + TIME -->
+    <input type="date" id="date" required>
+    <input type="time" id="start" required>
+    <input type="time" id="end" required>
+
+    <!-- STATUS -->
+    <div class="group">
+  <strong>Status:</strong>
+
+  <div class="radio-group">
+    <label>
+      <input type="radio" name="status" value="Available" checked>
+      Available
+    </label>
+
+    <label>
+      <input type="radio" name="status" value="Occupied">
+      Occupied
+    </label>
+  </div>
+</div>
+
+    <button type="submit">Save Update</button>
+
+    <div class="success" id="msg">
+      ✔️ Update saved successfully <br><br>
+      <a href="dashboard.html">Go to Dashboard</a>
+    </div>
+  </form>
+
+</div>
+
+<script>
+let updates = JSON.parse(localStorage.getItem("updates")) || [];
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let status = document.querySelector('input[name="status"]:checked').value;
+
+  updates.push({
+    room: document.getElementById("room").value.toLowerCase(),
+    roomType: document.getElementById("roomType").value,
+    faculty: document.getElementById("faculty").value || "-",
+    date: document.getElementById("date").value,
+    startTime: document.getElementById("start").value,
+    endTime: document.getElementById("end").value,
+    status: status
+  });
+
+  localStorage.setItem("updates", JSON.stringify(updates));
+
+  // Show success
+  document.getElementById("msg").style.display = "block";
+
+  // Reset form for next entry
+  document.getElementById("form").reset();
+});
+</script>
+
+</body>
+</html>
