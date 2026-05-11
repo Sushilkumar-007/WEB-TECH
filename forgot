@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot Password - Room Availability System</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 35px;
+      width: 360px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #2e7d32;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #2e7d32;
+      box-shadow: 0 0 5px rgba(46,125,50,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2e7d32;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1b5e20;
+    }
+
+    .success-box {
+      display: none;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 14px;
+      border-left: 4px solid #2e7d32;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #2e7d32;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Forgot Password</h2>
+
+    <p>Enter your registered email to reset your password</p>
+
+    <form id="forgotForm">
+      <input type="email" id="email" placeholder="Enter Email" required>
+
+      <button type="submit">Send Reset Link</button>
+
+      <div class="success-box" id="successBox">
+        ✔️ Password reset link sent (demo)
+      </div>
+    </form>
+
+    <div class="links">
+      <p><a href="login.html">Back to Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("forgotForm");
+    const successBox = document.getElementById("successBox");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      successBox.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
